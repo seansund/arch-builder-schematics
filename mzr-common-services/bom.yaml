@@ -1,0 +1,26 @@
+apiVersion: cloud.ibm.com/v1alpha1
+kind: BillOfMaterial
+metadata:
+  name: common-services
+spec:
+  modules:
+    - name: key-protect
+    - name: ibm-object-storage
+    - name: ibm-activity-tracker
+    - name: sysdig
+    - name: ibm-resource-group
+    - name: logdna
+    - name: ibm-access-group
+    - name: hpcs
+      variables:
+        - name: provision
+          value: false
+      dependencies:
+        - name: resource_group
+          ref: hpcs_resource_group
+    - name: ibm-resource-group
+      alias: hpcs_resource_group
+      variables:
+        - name: provision
+          value: false
+  variables: []
